@@ -25,12 +25,6 @@
 
 <h2>添加学生信息</h2>
 <form action="${pageContext.request.contextPath}/insert" method="post">
-    学生id:
-    <label>
-        <input type="number" name="id" required>
-    </label>
-    <br>
-    <br>
     学生姓名：
     <label>
         <input type="text" name="name" required>
