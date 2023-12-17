@@ -12,6 +12,7 @@
 </head>
 <body>
 <a href="${pageContext.request.contextPath}/logout">退出登录</a>
+<a href="${pageContext.request.contextPath}/getStudents">查看全部学生信息</a>
 <h2>查询学生信息</h2>
 <form action="${pageContext.request.contextPath}/select" method="post">
     学生姓名：
@@ -93,8 +94,5 @@
     </label>
     <button type="submit">修改</button>
 </form>
-<br>
-<br>
-<a href="${pageContext.request.contextPath}/getStudents">查看全部学生信息</a>
 </body>
 </html>
