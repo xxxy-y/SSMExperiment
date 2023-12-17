@@ -57,6 +57,6 @@ public interface StudentMapper {
      * @param student 需要插入的用户
      * @return 1/0 1 success 0 fail
      */
-    @Insert("INSERT INTO students(NAME, age, gender, number, address, STATUS) VALUE (#{name}, #{age}, #{gender}, #{number}, #{address}, #{status})")
+    @Insert("INSERT INTO students(NAME, age, gender, number, address, STATUS) VALUES (#{name}, #{age}, #{gender}, #{number}, #{address}, #{status})")
     int insertStudent(Student student);
 }

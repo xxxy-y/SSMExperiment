@@ -28,37 +28,37 @@
 <form action="${pageContext.request.contextPath}/insert" method="post">
     学生姓名：
     <label>
-        <input type="text" name="name" required>
+        <input type="text" name="name">
     </label>
     <br>
     <br>
     学生年龄：
     <label>
-        <input type="number" name="age" required>
+        <input type="number" name="age">
     </label>
     <br>
     <br>
     学生年级：
     <label>
-        <input type="text" name="gender" required>
+        <input type="text" name="gender">
     </label>
     <br>
     <br>
     学生编号：
     <label>
-        <input type="text" name="number" required>
+        <input type="text" name="number">
     </label>
     <br>
     <br>
     学生地址：
     <label>
-        <input type="text" name="address" required>
+        <input type="text" name="address">
     </label>
     <br>
     <br>
     学生状态：
     <label>
-        <input type="number" name="status" required>
+        <input type="number" name="status">
     </label>
     <br>
     <br>
