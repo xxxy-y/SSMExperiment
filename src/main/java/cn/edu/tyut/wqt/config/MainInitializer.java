@@ -1,5 +1,6 @@
 package cn.edu.tyut.wqt.config;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
@@ -23,7 +24,7 @@ public class MainInitializer extends AbstractAnnotationConfigDispatcherServletIn
     }
 
     @Override
-    protected String[] getServletMappings() {
+    protected String @NotNull [] getServletMappings() {
         return new String[]{"/"};
     }
 }

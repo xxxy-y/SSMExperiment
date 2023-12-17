@@ -1,9 +1,8 @@
 package cn.edu.tyut.wqt.config;
 
-import org.apache.ibatis.logging.slf4j.Slf4jImpl;
 import org.apache.ibatis.session.AutoMappingBehavior;
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.mapper.MapperScannerConfigurer;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 
@@ -17,69 +16,31 @@ import javax.sql.DataSource;
  * @Time 22:30
  * @Package_Name cn.edu.tyut.wqt.config
  */
+@MapperScan("cn.edu.tyut.wqt.mapper")
 public class MybatisConfig {
     @Bean
     public SqlSessionFactoryBean getSqlSessionFactoryBean(@Autowired DataSource dataSource) {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-
-        //设置连接池
         sqlSessionFactoryBean.setDataSource(dataSource);
-
-        //TODO: 替代xml文件的java配置
-        /*
-
-            <settings>
-                <!-- 开启驼峰式映射-->
-                <setting name="mapUnderscoreToCamelCase" value="true"/>
-                <!-- 开启logback日志输出-->
-                <setting name="logImpl" value="SLF4J"/>
-                <!--开启resultMap自动映射 -->
-                <setting name="autoMappingBehavior" value="FULL"/>
-            </settings>
-
-            <typeAliases>
-                <!-- 给实体类起别名 -->
-                <package name="com.atguigu.pojo"/>
-            </typeAliases>
-
-            <plugins>
-                <plugin interceptor="com.github.pagehelper.PageInterceptor">
-                    <!--
-                        helperDialect：分页插件会自动检测当前的数据库链接，自动选择合适的分页方式。
-                        你可以配置helperDialect属性来指定分页插件使用哪种方言。配置时，可以使用下面的缩写值：
-                        oracle,mysql,mariadb,sqlite,hsqldb,postgresql,db2,sqlserver,informix,h2,sqlserver2012,derby
-                        （完整内容看 PageAutoDialect） 特别注意：使用 SqlServer2012 数据库时，
-                        https://github.com/pagehelper/Mybatis-PageHelper/blob/master/wikis/zh/HowToUse.md#%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%B9%E8%A8%80
-                     -->
-                    <property name="helperDialect" value="mysql"/>
-                </plugin>
-            </plugins>
-
-         */
-
-        //settings [包裹到一个configuration对象,切记别倒错包]
         org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
         configuration.setMapUnderscoreToCamelCase(true);
-        configuration.setLogImpl(Slf4jImpl.class);
         configuration.setAutoMappingBehavior(AutoMappingBehavior.FULL);
         sqlSessionFactoryBean.setConfiguration(configuration);
-
-        //typeAliases
         sqlSessionFactoryBean.setTypeAliasesPackage("cn.edu.tyut.entity");
-
-        //分页插件配置
-//        PageInterceptor pageInterceptor = new PageInterceptor();
-//        Properties properties = new Properties();
-//        properties.setProperty("helperDialect","mysql");
-//        pageInterceptor.setProperties(properties);
-//        sqlSessionFactoryBean.addPlugins(pageInterceptor);
         return sqlSessionFactoryBean;
     }
 
-    @Bean
-    public MapperScannerConfigurer getMapperScannerConfigurer() {
-        MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
-        mapperScannerConfigurer.setBasePackage("cn.edu.tyut.wqt.mapper");
-        return mapperScannerConfigurer;
-    }
+    /**
+     * 使用 MapperScannerConfigurer 设置 Mapper 接口所在的包路径时，并不会直接将包下的类注册为 Bean。它的作用是告诉 Spring 在扫描指定包路径时要根据 Mapper 接口的规范来生成相应的 Bean。
+     * 在 MyBatis 中，Mapper 接口并不是通过 @Component 或 @Bean 注解来进行注册，而是通过 MyBatis 的 MapperFactoryBean 来生成对应的代理类，并将其注册为 Bean。MapperFactoryBean 是 MyBatis 提供的一个 FactoryBean 实现类，它负责创建代理对象，并将其注册到 Spring 容器中。
+     * MapperScannerConfigurer 类就是用来配置 MapperFactoryBean 的，它会将指定包路径下的 Mapper 接口转换成对应的 MapperFactoryBean，并将其注册为 Bean。这样，在其他地方使用 @Autowired 或 @Resource 注解时，就可以直接注入对应的 Mapper 接口的代理对象了。
+     * 因此，使用 MapperScannerConfigurer 设置 Mapper 接口所在的包路径时，实际上是在配置 Spring 扫描 Mapper 接口并生成对应的 Bean 的规则。并不是直接将包下的类注册为 Bean，而是根据 Mapper 接口的规范通过 MapperFactoryBean 进行动态代理后注册为 Bean。
+     * @return mapperScannerConfigurer
+     */
+//    @Bean
+//    public MapperScannerConfigurer getMapperScannerConfigurer() {
+//        MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
+//        mapperScannerConfigurer.setBasePackage("cn.edu.tyut.wqt.mapper");
+//        return mapperScannerConfigurer;
+//    }
 }
