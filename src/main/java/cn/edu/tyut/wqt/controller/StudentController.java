@@ -37,7 +37,7 @@ public class StudentController {
         return "main";
     }
 
-    @PostMapping("/toLogin")
+    @GetMapping("/toLogin")
     public String toLoginPage() {
         return "login";
     }
