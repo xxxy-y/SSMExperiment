@@ -26,42 +26,37 @@
 
 <h2>添加学生信息</h2>
 <form action="${pageContext.request.contextPath}/insert" method="post">
+    学生id：
+    <label>
+        <input type="number" name="id" required><br><br>
+    </label>
     学生姓名：
     <label>
-        <input type="text" name="name">
+        <input type="text" name="name" required><br><br>
     </label>
-    <br>
-    <br>
     学生年龄：
     <label>
-        <input type="number" name="age">
+        <input type="number" name="age" required><br><br>
     </label>
-    <br>
-    <br>
     学生年级：
     <label>
-        <input type="text" name="gender">
+        <input type="text" name="gender" required><br><br>
     </label>
-    <br>
-    <br>
     学生编号：
     <label>
-        <input type="text" name="number">
+        <input type="text" name="number" required><br><br>
     </label>
-    <br>
-    <br>
     学生地址：
     <label>
-        <input type="text" name="address">
+        <input type="text" name="address" required><br><br>
     </label>
-    <br>
-    <br>
-    学生状态：
-    <label>
-        <input type="number" name="status">
-    </label>
-    <br>
-    <br>
+<%--    因为"status"字段是用于服务器响应中的状态码字段。因此，在请求头中不应该包含名为"status"的字段。--%>
+<%--    当我这里写了一个名为status的字段--%>
+<%--    如果你的请求中包含了名为"status"的字段，那么它可能被视为无效的请求信息帧，从而导致出现400错误。--%>
+<%--    学生状态：--%>
+<%--    <label>--%>
+<%--        <input type="number" name="status"><br><br>--%>
+<%--    </label>--%>
     <button type="submit">添加</button>
 </form>
 <br>
