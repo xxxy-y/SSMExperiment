@@ -1,8 +1,6 @@
 package cn.edu.tyut.wqt.entity;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * @Author 羊羊
