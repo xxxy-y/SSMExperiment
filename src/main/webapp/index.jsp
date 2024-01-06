@@ -22,7 +22,8 @@
     </label>
     <br>
     <br>
-    <input type="submit" value="登录">
+    <button type="submit">登录</button>
+    <button type="reset">重置</button>
 </form>
 </body>
 </html>

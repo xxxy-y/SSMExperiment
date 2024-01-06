@@ -13,7 +13,7 @@
 </head>
 <body>
 <c:forEach items="${studentsList}" var="student">
-<p>${student}</p><br>
+    <p>${student}</p><br>
 </c:forEach>
 </body>
 </html>

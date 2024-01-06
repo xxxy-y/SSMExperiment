@@ -43,7 +43,7 @@ public class StudentController {
     }
 
     @PostMapping("/login")
-    public String login(@NotNull User user, Model model, HttpSession httpSession) {
+    public String login(@NotNull User user,@RequestParam Model model, HttpSession httpSession) {
         String username = user.getUsername();
         String password = user.getPassword();
         if ("wqt".equals(username) && "123456".equals(password)) {
